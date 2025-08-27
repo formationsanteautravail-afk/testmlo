@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation PSSM - Premiers Secours en Santé Mentale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #9400D3 0%, #7B68EE 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="brain" patternUnits="userSpaceOnUse" width="100" height="100"><path d="M20,50 Q30,30 50,50 Q70,30 80,50 Q70,70 50,50 Q30,70 20,50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></pattern></defs><rect width="100" height="100" fill="url(%23brain)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+        
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .formation-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .info-item {
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-item strong {
+            display: block;
+            font-size: 1.1em;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section h2 {
+            color: #9400D3;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #9400D3, #7B68EE);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Description */
+        .description {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid #9400D3;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .description p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        /* Objectifs */
+        .objectifs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .objectif-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(148,0,211,0.1);
+            border-top: 4px solid #9400D3;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .objectif-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(148,0,211,0.15);
+        }
+        
+        .objectif-card h3 {
+            color: #9400D3;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        /* Programme Accordion */
+        .programme-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .accordion-header {
+            background: #9400D3;
+            color: white;
+            padding: 20px 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-header:hover {
+            background: #7B68EE;
+        }
+        
+        .accordion-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .accordion-content.active {
+            max-height: 1000px;
+            padding: 25px 30px;
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .session {
+            margin-bottom: 20px;
+        }
+        
+        .session h4 {
+            color: #9400D3;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .session ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        
+        .session li {
+            margin-bottom: 5px;
+        }
+        
+        /* Location */
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .location-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .location-info h3 {
+            color: #9400D3;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        
+        /* Downloads */
+        .downloads {
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 40px;
+            border-radius: 15px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #9400D3, #7B68EE);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(148,0,211,0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(148,0,211,0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .contact-info h3 {
+            color: #9400D3;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info p {
+            margin: 5px 0;
+        }
+        
+        .contact-info a {
+            color: #7B68EE;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .formation-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .location-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .logos {
+                gap: 20px;
+            }
+            
+            .logo img {
+                height: 50px;
+            }
+            
+            .accordion-header {
+                padding: 15px 20px;
+                font-size: 1em;
+            }
+            
+            .accordion-content.active {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logos">
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMjAgNDBMMzAgMjBMNTAgNDBMNzAgMjBMODAgNDBMNzAgNjBMNTAgNDBMMzAgNjBaIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIvPgo8dGV4dCB4PSIxMDAiIHk9IjQ1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMzIj5BTEIgRk9STUFUSU9OPC90ZXh0Pgo8L3N2Zz4=" alt="ALB Formation">
+                </div>
+                <div class="logo">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDMwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yMCA1MEM3IDM1IDcgNjUgMjAgNTBaIiBzdHJva2U9IiM5NDAwRDMiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSIvPgo8cGF0aCBkPSJNMjAgNTBDNDAgMjAgNjAgMjAgODAgNTBDNjAgODAgNDAgODAgMjAgNTBaIiBzdHJva2U9IiM5NDAwRDMiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSIvPgo8dGV4dCB4PSIxMTAiIHk9IjM1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMzIj5Gb3JtYXRyaWNlPC90ZXh0Pgo8dGV4dCB4PSIxMTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMzMzIj5hY2NyZWRpdMOpZTwvdGV4dD4KPHR4dCB4PSIxMTAiIHk9IjgwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiMzMzMiPlByZW1pZXJzIFNlY291cnMgZW4gU2FudGUgTWVudGFsZTwvdGV4dD4KPC9zdmc+" alt="Formatrice accréditée PSSM">
+                </div>
+            </div>
+            <h1>Premiers Secours en Santé Mentale</h1>
+            <p class="subtitle">Formation certifiante PSSM</p>
+            <div class="formation-info">
+                <div class="info-item">
+                    <strong>📅 13 & 14 octobre 2025</strong>
+                </div>
+                <div class="info-item">
+                    <strong>⏱️ 14 heures (2 jours)</strong>
+                </div>
+                <div class="info-item">
+                    <strong>👥 Tout public dès 18 ans</strong>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Description -->
+            <section class="section">
+                <h2>À propos de la formation</h2>
+                <div class="description">
+                    <p>Les Premiers secours en santé mentale constituent l'aide qui est apportée à une personne qui subit le début d'un trouble de santé mentale, une détérioration d'un trouble de santé mentale ou qui est dans une phase de crise de santé mentale.</p>
+                    <p>Les premiers secours sont donnés jusqu'à ce qu'une aide professionnelle puisse être apportée ou jusqu'à ce que la crise soit résolue. Ils sont l'équivalent en santé mentale, des gestes de premiers secours qui eux, apportent une aide physique à la personne en difficulté.</p>
+                </div>
+                
+                <div class="objectifs">
+                    <div class="objectif-card">
+                        <h3>🧠 Connaissances de base</h3>
+                        <p>Acquérir des connaissances de base concernant les troubles de santé mentale</p>
+                    </div>
+                    <div class="objectif-card">
+                        <h3>🚨 Gestion de crise</h3>
+                        <p>Mieux appréhender les différents types de crises en santé mentale</p>
+                    </div>
+                    <div class="objectif-card">
+                        <h3>🤝 Compétences relationnelles</h3>
+                        <p>Développer l'écoute sans jugement, rassurer et donner de l'information adaptée</p>
+                    </div>
+                    <div class="objectif-card">
+                        <h3>⚡ Comportements agressifs</h3>
+                        <p>Mieux faire face aux comportements agressifs</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Programme -->
+            <section class="section">
+                <h2>Programme détaillé</h2>
+                <div class="programme-container">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>JOUR 1 - Matin : Introduction et dépression</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="session">
+                                <h4>Introduction et aperçu des sessions</h4>
+                            </div>
+                            <div class="session">
+                                <h4>Session 1.1 – Introduction à la santé mentale et aux interventions</h4>
+                                <ul>
+                                    <li>Santé mentale en France (facteurs de risque – statistiques – conséquences)</li>
+                                    <li>Interventions efficaces</li>
+                                </ul>
+                            </div>
+                            <div class="session">
+                                <h4>Session 1.2 – Introduction aux Premiers Secours en Santé Mentale</h4>
+                                <ul>
+                                    <li>Cadre des premiers secours en santé mentale</li>
+                                    <li>Le plan d'action AERER</li>
+                                    <li>Présentation de la dépression : signes, symptômes et interventions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>JOUR 1 - Après-midi : Dépression et troubles anxieux</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="session">
+                                <h4>Session 2.1 – Le plan d'action pour la dépression</h4>
+                                <ul>
+                                    <li>Rappel de la dépression</li>
+                                    <li>Action 1 pour la dépression</li>
+                                    <li>Crise suicidaire : Présentation - Assister</li>
+                                </ul>
+                            </div>
+                            <div class="session">
+                                <h4>Session 2.2 – Les troubles anxieux</h4>
+                                <ul>
+                                    <li>Présentation des troubles anxieux</li>
+                                    <li>Signes et symptômes</li>
+                                    <li>Interventions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>JOUR 2 - Matin : Troubles anxieux et psychotiques</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="session">
+                                <h4>Session 3.1 - Le plan d'action pour les troubles anxieux</h4>
+                                <ul>
+                                    <li>Rappel des troubles anxieux</li>
+                                    <li>Le plan d'action PSSM pour les troubles anxieux, attaques de paniques et chocs post-traumatique</li>
+                                    <li>Action 1 pour les troubles anxieux (hors crise)</li>
+                                    <li>Crise d'attaque de panique : Présentation - Assister</li>
+                                    <li>Crise après un événement traumatique : Présentation - Assister</li>
+                                </ul>
+                            </div>
+                            <div class="session">
+                                <h4>Session 3.2 – Les troubles psychotiques</h4>
+                                <ul>
+                                    <li>PSSM pour les troubles anxieux (suite)</li>
+                                    <li>Présentation des troubles psychotiques</li>
+                                    <li>Signes et symptômes</li>
+                                    <li>Interventions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>JOUR 2 - Après-midi : Troubles psychotiques et substances</span>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="session">
+                                <h4>Session 4.1 – Le plan d'action pour les troubles psychotiques</h4>
+                                <ul>
+                                    <li>Rappel des troubles psychotiques</li>
+                                    <li>Action 1 pour les troubles psychotiques</li>
+                                    <li>Crise psychotique sévère : Présentation - Assister</li>
+                                    <li>Premiers Secours pour les troubles psychotiques (suite)</li>
+                                </ul>
+                            </div>
+                            <div class="session">
+                                <h4>Session 4.2 – L'utilisation des substances et le plan d'action</h4>
+                                <ul>
+                                    <li>Présentation des troubles liés à l'utilisation de substances</li>
+                                    <li>Signes, symptômes et interventions</li>
+                                    <li>Action 1 pour l'utilisation de substances</li>
+                                    <li>Crise liée à l'utilisation de substances</li>
+                                    <li>Crise d'agressivité</li>
+                                    <li>Urgence médicale</li>
+                                    <li>PSSM pour l'utilisation des substances (suite)</li>
+                                </ul>
+                            </div>
+                            <div class="session">
+                                <h4>Clôture de la formation</h4>
+                                <ul>
+                                    <li>Retour sur les attentes</li>
+                                    <li>Aspects administratifs (post-test, questionnaire de satisfaction…)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location -->
+            <section class="section">
+                <h2>Lieu de formation</h2>
+                <div class="location-container">
+                    <div class="location-info">
+                        <h3>📍 ALB Formation</h3>
+                        <p><strong>Adresse :</strong><br>
+                        Entrée numéro 2<br>
+                        9 rue du Progrès<br>
+                        44840 LES SORINIERES</p>
+                        
+                        <p style="margin-top: 20px;"><strong>Dates :</strong><br>
+                        13 et 14 octobre 2025</p>
+                        
+                        <p style="margin-top: 20px;"><strong>Horaires :</strong><br>
+                        9h00 - 12h30 / 13h30 - 17h00</p>
+                        
+                        <p style="margin-top: 20px;"><strong>Public :</strong><br>
+                        Tout public à partir de 18 ans<br>
+                        Aucun pré-requis</p>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2709.8944874949087!2d-1.5191599999999998!3d47.1569444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec8b0a1d9a7b%3A0x1234567890abcdef!2s9%20Rue%20du%20Progr%C3%A8s%2C%2044840%20Les%20Sorini%C3%A8res!5e0!3m2!1sfr!2sfr!4v1635789123456!5m2!1sfr!2sfr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Downloads -->
+            <section class="section">
+                <h2>Documents à télécharger</h2>
+                <div class="downloads">
+                    <p style="margin-bottom: 20px;">Retrouvez toutes les informations détaillées dans le programme complet :</p>
+                    <a href="#" class="download-btn" onclick="downloadProgramme()">📄 Télécharger le programme complet</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <p><strong>BERNARD Anne-Laure</strong></p>
+                <p>Formatrice accréditée PSSM</p>
+                <p>📧 <a href="mailto:formationsanteautravail@gmail.com">formationsanteautravail@gmail.com</a></p>
+                <p>📞 <a href="tel:0770452500">07 70 45 25 00</a></p>
+            </div>
+            <div style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+                <p>Formation accessible aux personnes en situation de handicap</p>
+                <p>Pour toute adaptation nécessaire, contactez-nous</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = header.nextElementSibling;
+            const isActive = item.classList.contains('active');
+            
+            // Close all accordion items
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.accordion-content').classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+
+        function downloadProgramme() {
+            // This would typically link to the actual PDF file
+            alert('Le téléchargement du programme complet sera disponible lors de la mise en ligne. Pour l\'instant, contactez Anne-Laure BERNARD pour obtenir le document.');
+        }
+
+        // Open first accordion item by default
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstAccordion = document.querySelector('.accordion-item');
+            if (firstAccordion) {
+                firstAccordion.classList.add('active');
+                firstAccordion.querySelector('.accordion-content').classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
